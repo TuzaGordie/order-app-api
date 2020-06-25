@@ -9,6 +9,7 @@ class ItemSchema extends Schema {
       table.increments()
       table.integer('order_id').unsigned().references('id').inTable('orders')
       table.string('name', 255)
+      table.string('price', 255)
       table.timestamps()
     })
   }
