@@ -28,6 +28,16 @@ class OrderController {
     await order.delete();
     return order;
   }
+
+  async update({ auth, request, params }) {
+    const user = await auth.getUser();
+    const { id } = params;
+    const order = await Order.find(id);
+    AuthorizationService.verifyPermission(order, user);
+    order.merge(request.only('name'));
+    await order.save();
+    return order;
+  }
 }
 
 module.exports = OrderController;
