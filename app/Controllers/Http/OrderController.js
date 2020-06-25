@@ -1,7 +1,7 @@
 "use strict";
 
 const Order = use('App/Models/Order');
-const AuthorizationService = use('App/Services/AuthorizationService')
+const AuthorizationService = use('App/Services/AuthorizationService');
 
 class OrderController {
   async index({ auth }) {

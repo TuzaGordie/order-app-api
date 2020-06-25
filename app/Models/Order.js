@@ -7,6 +7,10 @@ class Order extends Model {
   user() {
     return this.belongsTo("App/Model/User");
   }
+
+  items() {
+    return this.hasMany("App/Models/Item");
+  }
 }
 
 module.exports = Order;
