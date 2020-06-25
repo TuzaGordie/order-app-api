@@ -28,6 +28,9 @@ Route.group(() => {
 
   Route.get('orders/:id/items', 'ItemController.index').middleware('auth');
   Route.post('orders/:id/items', 'ItemController.create').middleware('auth');
+
+  Route.delete('items/:id', 'ItemController.destroy').middleware('auth');
+  Route.patch('items/:id', 'ItemController.update').middleware('auth');
 })
   .prefix('api');
 
