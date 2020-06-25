@@ -23,6 +23,7 @@ Route.group(() => {
 
   Route.get('orders', 'OrderController.index').middleware('auth');
   Route.post('orders', 'OrderController.create').middleware('auth');
+  Route.delete('orders/:id', 'OrderController.destroy').middleware('auth');
 })
   .prefix('api');
 

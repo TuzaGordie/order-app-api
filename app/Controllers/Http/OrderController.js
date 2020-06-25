@@ -1,6 +1,7 @@
 "use strict";
 
 const Order = use('App/Models/Order');
+const AuthorizationService = use('App/Services/AuthorizationService')
 
 class OrderController {
   async index({ auth }) {
@@ -16,6 +17,15 @@ class OrderController {
       name,
     });
     await user.orders().save(order);
+    return order;
+  }
+
+  async destroy({ auth, request, params }) {
+    const user = await auth.getUser();
+    const { id } = params;
+    const order = await Order.find(id);
+    AuthorizationService.verifyPermission(order, user);
+    await order.delete();
     return order;
   }
 }
