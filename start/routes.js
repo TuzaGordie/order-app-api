@@ -1,5 +1,6 @@
 'use strict'
 
+
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -18,7 +19,10 @@ const Route = use('Route')
 
 Route.group(() => {
   Route.post('auth/register', 'UserController.register'); 
-  Route.post('auth/login', 'UserController.login'); 
+  Route.post('auth/login', 'UserController.login');
+
+  Route.get('orders', 'OrderController.index').middleware('auth');
+  Route.post('orders', 'OrderController.create').middleware('auth');
 })
   .prefix('api');
 
