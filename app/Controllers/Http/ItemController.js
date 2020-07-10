@@ -15,14 +15,13 @@ class ItemController {
 
   async create({ auth, request, params }) {
     const user = await auth.getUser();
-    const { name, price } = request.all();
+    const { title } = request.all();
     const { id } = params;
     const order = await Order.find(id);
     AuthorizationService.verifyPermission(order, user);
     const item = new Item();
     item.fill({
-      name,
-      price,
+      title,
     });
     await order.items().save(item);
     return item;
@@ -44,7 +43,7 @@ class ItemController {
     const item = await Item.find(id);
     const order = await item.order().fetch();
     AuthorizationService.verifyPermission(order, user);
-    item.merge(request.only(["name", "price"]));
+    item.merge(request.only(["title"]));
     await item.save();
     return item;
   }

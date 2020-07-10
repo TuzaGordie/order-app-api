@@ -8,8 +8,7 @@ class ItemSchema extends Schema {
     this.create('items', (table) => {
       table.increments()
       table.integer('order_id').unsigned().references('id').inTable('orders')
-      table.string('name', 255)
-      table.string('price', 255)
+      table.string('title', 255)
       table.timestamps()
     })
   }
