@@ -3,6 +3,7 @@
 const Order = use('App/Models/Order');
 const AuthorizationService = use('App/Services/AuthorizationService');
 
+
 class OrderController {
   async index({ auth }) {
     const user = await auth.getUser();
