@@ -53,11 +53,11 @@ module.exports = {
   mysql: {
     client: 'mysql',
     connection: {
-      host: Env.get('DB_HOST', 'localhost'),
+      host: Env.get('DB_HOST', 'us-cdbr-east-02.cleardb.com'),
       port: Env.get('DB_PORT', ''),
-      user: Env.get('DB_USER', 'root'),
-      password: Env.get('DB_PASSWORD', ''),
-      database: Env.get('DB_DATABASE', 'adonis')
+      user: Env.get('DB_USER', 'bc022ba5586e33'),
+      password: Env.get('DB_PASSWORD', '0d4b3096'),
+      database: Env.get('DB_DATABASE', 'heroku_3b05248e8009552')
     },
     debug: Env.get('DB_DEBUG', false)
   },
