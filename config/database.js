@@ -55,11 +55,11 @@ module.exports = {
 // config/database.js
 
 connection: {
-  host: Env.get('DB_HOST', CLEARDB_DATABASE_URL.host),
+  host: Env.get('DB_HOST', CLEARDB_DATABASE_URL.us-cdbr-east-02.cleardb.com),
   port: Env.get('DB_PORT', ''),
-  user: Env.get('DB_USER', CLEARDB_DATABASE_URL.username),
-  password: Env.get('DB_PASSWORD', CLEARDB_DATABASE_URL.password),
-  database: Env.get('DB_DATABASE', CLEARDB_DATABASE_URL.pathname.substr(1))
+  user: Env.get('DB_USER', CLEARDB_DATABASE_URL.bc022ba5586e33),
+  password: Env.get('DB_PASSWORD', CLEARDB_DATABASE_URL.0d4b3096),
+  database: Env.get('DB_DATABASE', CLEARDB_DATABASE_URL.heroku_3b05248e8009552.substr(1))
 },
 
   /*
