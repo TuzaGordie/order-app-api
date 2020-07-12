@@ -6,6 +6,10 @@ const Env = use('Env')
 /** @type {import('@adonisjs/ignitor/src/Helpers')} */
 const Helpers = use('Helpers')
 
+// config/database.js
+const Url = require('url-parse')
+const CLEARDB_DATABASE_URL = new Url(Env.get('CLEARDB_DATABASE_URL'))
+
 module.exports = {
   /*
   |--------------------------------------------------------------------------
@@ -48,17 +52,15 @@ module.exports = {
   | npm i --save mysql
   |
   */
-  mysql: {
-    client: 'mysql',
-    connection: {
-      host: Env.get('DB_HOST', 'localhost'),
-      port: Env.get('DB_PORT', ''),
-      user: Env.get('DB_USER', 'root'),
-      password: Env.get('DB_PASSWORD', ''),
-      database: Env.get('DB_DATABASE', 'adonis')
-    },
-    debug: Env.get('DB_DEBUG', false)
-  },
+// config/database.js
+
+connection: {
+  host: Env.get('DB_HOST', CLEARDB_DATABASE_URL.host),
+  port: Env.get('DB_PORT', ''),
+  user: Env.get('DB_USER', CLEARDB_DATABASE_URL.username),
+  password: Env.get('DB_PASSWORD', CLEARDB_DATABASE_URL.password),
+  database: Env.get('DB_DATABASE', CLEARDB_DATABASE_URL.pathname.substr(1))
+},
 
   /*
   |--------------------------------------------------------------------------
