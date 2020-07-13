@@ -17,6 +17,10 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
+Route.get('/', ({ request }) => {
+  return {greetings: 'Welcome to Order app api'}
+})
+
 Route.group(() => {
   Route.post('auth/register', 'UserController.register'); 
   Route.post('auth/login', 'UserController.login');
