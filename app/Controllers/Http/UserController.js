@@ -11,6 +11,7 @@ async login({ request, auth }) {
 }
 
   async register({ request }) {
+    console.log('hey ninja');
     const { email, password } = request.all();
     await User.create({
       email,
