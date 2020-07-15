@@ -1,4 +1,5 @@
 'use strict'
+const Env = use('Env')
 
 module.exports = {
   /*
@@ -16,7 +17,13 @@ module.exports = {
   | Function - Receives the current origin and should return one of the above values.
   |
   */
-  origin: true,
+ origin: function (currentOrigin) {
+  if(Env.get('NODE_ENV​') === 'production') {
+    return currentOrigin === 'https://simple-order-app.herokuapp.com'
+  } else {
+    true
+  }
+}
 
   /*
   |--------------------------------------------------------------------------
