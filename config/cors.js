@@ -16,7 +16,11 @@ module.exports = {
   | Function - Receives the current origin and should return one of the above values.
   |
   */
-  origin: false,
+ origin: [
+   'https://simple-order-app.herokuapp.com', 
+   'http://localhost:3333',
+   'https://simple-order-app.netlify.app'
+  ],
 
   /*
   |--------------------------------------------------------------------------
