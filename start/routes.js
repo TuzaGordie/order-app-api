@@ -18,7 +18,7 @@
 const Route = use('Route')
 
 Route.get('/', ({ request }) => {
-  return {greetings: 'Welcome to Order app api'}
+  return {greetings: 'Welcome to Order app api'};
 })
 
 Route.group(() => {
