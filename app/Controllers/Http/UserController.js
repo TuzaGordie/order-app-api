@@ -1,9 +1,7 @@
 "use strict";
 
-const User = use("App/Models/User");
+const User = use('App/Models/User');
 const nodemailer = require('nodemailer');
-const nodemailMailgun = require('nodemailer-mailgun-transport');
-// const Mail = use("Mail")
 
 class UserController {
 
@@ -19,36 +17,33 @@ class UserController {
     const { email, password } = request.all();
     await User.create({
       email, 
-      password
+      password,
     });
 
     //send notification email
-
     //Step 1 
-    const auth =  {
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
       auth: {
-        api_key: 'b01e7dbd36b7c5706affd5ee6eb67ae9-9a235412-3a4d629c',
-        domain: 'replies.theoyagha.com'
+        user: process.env.GMAIL,
+        pass: process.env.GMAIL_PASSWORD
       }
+    });
+
+    //Step 2
+    let mailOptions = {
+      from: 'sophisticateddev@gmail.com',
+      to: request.body.email,
+      subject: 'Welcome',
+      text: 'Order App Account Created'
     };
 
-    //Step 2 
-    let transporter = nodemailer.createTransport( nodemailMailgun(auth) );
-
-    //Step 3 
-    const mailOptions = {
-      from: 'Hey Ninja<sophisticateddev@gmail.com>',
-      to: 'gordie2u@gmail.com',
-      subject: 'Onboarding',
-      text: 'Welcome Aboard'
-    }
-
-    // Step 4 
+    //Step 3
     transporter.sendMail(mailOptions, function(err, data) {
       if(err) {
-        console.log('Error: ', err);
+        console.log('Error', err);
       } else {
-        console.log('Email Sent!!!');
+        console.log('Mail Sent!!!');
       }
     });
 
