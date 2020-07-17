@@ -2,6 +2,7 @@
 
 const User = use('App/Models/User');
 const nodemailer = require('nodemailer');
+const send = require('gmail-send');
 
 class UserController {
 
@@ -22,8 +23,11 @@ class UserController {
 
     //send notification email
     //Step 1 
-    let transporter = nodemailer.createTransport({
+    let mailserverinfo = nodemailer.createTransport({
       service: 'gmail',
+      host: 'stmp.gmail.com',
+      port: '465',
+      ssl: 'true',
       auth: {
         user: process.env.GMAIL,
         pass: process.env.GMAIL_PASSWORD
@@ -31,7 +35,7 @@ class UserController {
     });
 
     //Step 2
-    let mailOptions = {
+    let mailInfo = {
       from: 'sophisticateddev@gmail.com',
       to: request.body.email,
       subject: 'Welcome',
@@ -39,11 +43,11 @@ class UserController {
     };
 
     //Step 3
-    transporter.sendMail(mailOptions, function(err, data) {
+    mailserverinfo.sendMail(mailInfo, function(err, info) {
       if(err) {
         console.log('Error', err);
       } else {
-        console.log('Mail Sent!!!');
+        console.log('Mail Sent!!!' + info.response);
       }
     });
 
