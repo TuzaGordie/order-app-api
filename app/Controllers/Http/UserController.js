@@ -2,7 +2,7 @@
 
 const User = use('App/Models/User');
 const nodemailer = require('nodemailer');
-const send = require('gmail-send');
+const nodemailMailgun = require('nodemailer-mailgun-transport');
 
 class UserController {
 
@@ -23,31 +23,30 @@ class UserController {
 
     //send notification email
     //Step 1 
-    let mailserverinfo = nodemailer.createTransport({
-      service: 'gmail',
-      host: 'stmp.gmail.com',
-      port: '465',
-      ssl: 'true',
+    const auth =  {
       auth: {
-        user: process.env.GMAIL,
-        pass: process.env.GMAIL_PASSWORD
+        api_key: process.env.MAILGUN_API_KEY,
+        domain: process.env.MAILGUN_DOMAIN
       }
-    });
-
-    //Step 2
-    let mailInfo = {
-      from: 'sophisticateddev@gmail.com',
-      to: request.body.email,
-      subject: 'Welcome',
-      text: 'Order App Account Created'
     };
 
-    //Step 3
-    mailserverinfo.sendMail(mailInfo, function(err, info) {
+    //Step 2 
+    let transporter = nodemailer.createTransport( nodemailMailgun(auth) );
+
+    //Step 3 
+    const mailOptions = {
+      from: 'Gordie<sophisticateddev@gmail.com>',
+      to: request.body.email,
+      subject: 'Onboarding',
+      text: 'You have successfully created an Order app account'
+    }
+
+    // Step 4 
+    transporter.sendMail(mailOptions, function(err, data) {
       if(err) {
-        console.log('Error', err);
+        console.log('Error: ', err);
       } else {
-        console.log('Mail Sent!!!' + info.response);
+        console.log('Email Sent!!!');
       }
     });
 
