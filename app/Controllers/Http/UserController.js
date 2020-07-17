@@ -12,7 +12,7 @@ class UserController {
 
     //send notification email
     //Step 1 
-    const auth =  {
+    const auths =  {
       auth: {
         api_key: process.env.MAILGUN_API_KEY,
         domain: process.env.MAILGUN_DOMAIN
@@ -20,7 +20,7 @@ class UserController {
     };
 
     //Step 2 
-    let transporter = nodemailer.createTransport( nodemailMailgun(auth) );
+    let transporter = nodemailer.createTransport( nodemailMailgun(auths) );
 
     //Step 3 
     const mailOptions = {
