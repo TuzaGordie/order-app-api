@@ -7,13 +7,8 @@ const nodemailMailgun = require('nodemailer-mailgun-transport');
 class UserController {
 
   async login({ request, auth }) {
-    console.log('auth...');
-    console.log(request.body.email, 'auth...p');
-
       const { email, password } = request.all();
       const token = await auth.attempt(email, password);
-      console.log(auth.password);
-      console.log('auth');
 
     //send notification email
     //Step 1 
